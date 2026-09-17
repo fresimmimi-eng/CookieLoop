@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CookieLoop | Más que galletas, una segunda vida</title>
+
+<style>
+
+/* =========================
+   COLORES
+========================= */
+
+:root{
+    --crema:#f8eee3;
+    --crema2:#fff9f3;
+    --carton:#c49a77;
+    --carton-claro:#d8b99d;
+    --morado:#59366f;
+    --morado-claro:#8060a0;
+    --lila:#d8c5dc;
+    --texto:#4c3b51;
+    --blanco:#ffffff;
+}
+
+/* =========================
+   GENERAL
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:var(--crema);
+    color:var(--texto);
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+img{
+    max-width:100%;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+header{
+    height:75px;
+    background:#eadbd0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    border-bottom:1px solid #dfcec0;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    letter-spacing:-2px;
+    color:var(--morado);
+}
+
+.logo span{
+    font-weight:500;
+}
+
+.logo small{
+    font-size:18px;
+    margin-left:5px;
+}
+
+nav{
+    display:flex;
+    gap:30px;
+}
+
+nav a{
+    color:var(--morado);
+    font-size:14px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#9b6ab5;
+}
+
+.cart{
+    font-size:22px;
+    color:var(--morado);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:620px;
+    padding:70px 7%;
+    display:grid;
+    grid-template-columns:40% 60%;
+    align-items:center;
+    background:
+        radial-gradient(circle at 0% 100%,#d7c0db 0 140px,transparent 141px),
+        var(--crema);
+}
+
+.hero-text{
+    padding-left:5%;
+}
+
+.eyebrow{
+    color:var(--morado);
+    font-size:13px;
+    font-weight:bold;
+    letter-spacing:2px;
+    margin-bottom:15px;
+}
+
+.hero h1{
+    color:var(--morado);
+    font-size:70px;
+    line-height:.9;
+    letter-spacing:-5px;
+    margin-bottom:18px;
+}
+
+.subtitle{
+    color:var(--morado);
+    font-family:Georgia,serif;
+    font-style:italic;
+    font-size:31px;
+    line-height:1.2;
+}
+
+.hero-description{
+    max-width:400px;
+    font-size:15px;
+    line-height:1.6;
+    margin:22px 0 28px;
+}
+
+.button{
+    display:inline-flex;
+    align-items:center;
+    gap:18px;
+    background:var(--morado-claro);
+    color:white;
+    padding:14px 27px;
+    border-radius:30px;
+    font-weight:bold;
+    font-size:14px;
+    box-shadow:0 10px 25px rgba(89,54,111,.2);
+    transition:.3s;
+}
+
+.button:hover{
+    transform:translateY(-3px);
+}
+
+/* =========================
+   PRODUCTO HERO
+========================= */
+
+.product-area{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:480px;
+}
+
+.product-area::before{
+    content:"";
+    position:absolute;
+    width:620px;
+    height:390px;
+    background:#decadd;
+    border-radius:50%;
+    transform:rotate(-5deg);
+    opacity:.45;
+}
+
+.product-image{
+    position:relative;
+    z-index:2;
+    width:680px;
+    max-width:100%;
+    filter:drop-shadow(0 25px 25px rgba(67,46,36,.25));
+    transition:.5s;
+}
+
+.product-image:hover{
+    transform:scale(1.02);
+}
+
+.decor{
+    position:absolute;
+    color:var(--morado-claro);
+    font-size:35px;
+    font-weight:bold;
+}
+
+.decor1{
+    top:25px;
+    left:4%;
+}
+
+.decor2{
+    top:40px;
+    right:3%;
+}
+
+.decor3{
+    bottom:25px;
+    left:8%;
+}
+
+.decor4{
+    bottom:20px;
+    right:5%;
+}
+
+/* =========================
+   HISTORIA
+========================= */
+
+.story{
+    background:var(--crema2);
+    padding:65px 8%;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+}
+
+.story-box{
+    padding:10px 30px;
+}
+
+.story-box + .story-box{
+    border-left:1px solid #d9c8bb;
+}
+
+.icon{
+    font-size:30px;
+    color:var(--morado);
+    margin-bottom:10px;
+}
+
+.story-box h2{
+    color:var(--morado);
+    font-size:20px;
+    margin-bottom:15px;
+}
+
+.story-box p{
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* =========================
+   PRODUCTO
+========================= */
+
+.product-section{
+    padding:75px 8%;
+}
+
+.section-title{
+    text-align:center;
+    max-width:750px;
+    margin:auto;
+}
+
+.section-title h2{
+    color:var(--morado);
+    font-size:38px;
+    margin-bottom:12px;
+}
+
+.section-title p{
+    font-size:14px;
+}
+
+.product-card{
+    margin-top:40px;
+    background:#eee1e8;
+    border-radius:25px;
+    padding:30px;
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    gap:35px;
+    align-items:center;
+}
+
+.product-card h3{
+    color:var(--morado);
+    font-size:27px;
+    margin-bottom:8px;
+}
+
+.product-card > div > p{
+    font-size:13px;
+    margin-bottom:25px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+}
+
+.feature{
+    text-align:center;
+    padding:10px;
+}
+
+.feature-icon{
+    width:55px;
+    height:55px;
+    border:2px solid var(--morado);
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:auto auto 10px;
+    color:var(--morado);
+    font-size:23px;
+}
+
+.feature strong{
+    color:var(--morado);
+    font-size:12px;
+}
+
+.product-detail{
+    overflow:hidden;
+    border-radius:18px;
+}
+
+.product-detail img{
+    width:100%;
+    height:270px;
+    object-fit:cover;
+}
+
+/* =========================
+   SEGUNDA VIDA
+========================= */
+
+.second-life{
+    background:var(--lila);
+    padding:75px 8%;
+}
+
+.steps{
+    margin-top:40px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.step{
+    background:rgba(255,250,245,.75);
+    padding:27px;
+    min-height:190px;
+    border:1px solid rgba(89,54,111,.12);
+    transition:.3s;
+}
+
+.step:hover{
+    transform:translateY(-6px);
+}
+
+.number{
+    color:var(--morado);
+    font-weight:bold;
+    font-size:12px;
+}
+
+.step-icon{
+    font-size:30px;
+    color:var(--morado);
+    margin:15px 0 7px;
+}
+
+.step h3{
+    color:var(--morado);
+    font-size:19px;
+}
+
+.step p{
+    font-size:12px;
+    margin-top:7px;
+}
+
+/* =========================
+   ORGANIZADOR
+========================= */
+
+.reuse{
+    background:var(--crema2);
+    padding:80px 8%;
+}
+
+.reuse-content{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    gap:60px;
+}
+
+.reuse h2{
+    color:var(--morado);
+    font-size:42px;
+    line-height:1.1;
+}
+
+.reuse h2 span{
+    font-family:Georgia,serif;
+    font-style:italic;
+}
+
+.reuse p{
+    margin:18px 0 25px;
+    font-size:14px;
+    line-height:1.7;
+}
+
+.organizer{
+    background:#f5e8dc;
+    border:1px solid #dac8b8;
+    border-radius:25px;
+    padding:30px;
+}
+
+.organizer-box{
+    height:230px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    align-items:end;
+    gap:8px;
+}
+
+.drawer{
+    background:var(--carton);
+    border:4px solid #91694e;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:var(--morado);
+    font-size:30px;
+    height:150px;
+}
+
+.drawer:nth-child(2){
+    height:185px;
+}
+
+.drawer:nth-child(3){
+    height:135px;
+}
+
+.organizer-text{
+    text-align:center;
+    margin-top:18px;
+    color:var(--morado);
+    font-weight:bold;
+    font-size:12px;
+}
+
+/* =========================
+   MOCKUPS
+========================= */
+
+.mockups{
+    padding:75px 8%;
+    background:var(--crema);
+}
+
+.mockup-grid{
+    margin-top:40px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.mockup{
+    background:var(--crema2);
+    padding:18px;
+    border-radius:18px;
+    border:1px solid #ddccbd;
+    box-shadow:0 8px 20px rgba(70,50,40,.07);
+    transition:.3s;
+}
+
+.mockup:hover{
+    transform:translateY(-5px);
+}
+
+.mockup-image{
+    height:175px;
+    border-radius:12px;
+    overflow:hidden;
+    background:#e5d2c2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:15px;
+}
+
+.mockup-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.mockup h3{
+    color:var(--morado);
+    font-size:16px;
+}
+
+.mockup p{
+    font-size:11px;
+    margin-top:6px;
+}
+
+/* caja cerrada */
+
+.closed-box{
+    width:145px;
+    height:105px;
+    background:var(--carton-claro);
+    border:4px solid #8e654b;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:var(--morado);
+    font-weight:bold;
+    font-size:17px;
+    box-shadow:0 15px 20px rgba(65,45,35,.2);
+}
+
+/* =========================
+   CTA
+========================= */
+
+.cta{
+    background:var(--carton);
+    padding:30px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:var(--morado);
+}
+
+.cta h2{
+    font-family:Georgia,serif;
+    font-style:italic;
+    font-size:27px;
+}
+
+.cta p{
+    font-size:13px;
+    text-align:center;
+}
+
+/* =========================
+   CONTACTO
+========================= */
+
+.contact{
+    background:var(--crema2);
+    padding:75px 8%;
+    text-align:center;
+}
+
+.contact h2{
+    color:var(--morado);
+    font-size:38px;
+    margin-bottom:10px;
+}
+
+.contact p{
+    font-size:13px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#684878;
+    color:white;
+    padding:30px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.footer-logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+footer p{
+    font-size:10px;
+    margin-top:3px;
+}
+
+.social{
+    font-size:13px;
+}
+
+.legal{
+    font-size:9px;
+}
+
+/* =========================
+   ANIMACIONES
+========================= */
+
+.fade{
+    animation:appear 1s ease forwards;
+}
+
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1000px){
+
+    .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .hero-text{
+        padding:0;
+    }
+
+    .hero-description{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .product-area{
+        margin-top:40px;
+    }
+
+    .story{
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    .story-box + .story-box{
+        border-left:none;
+        border-top:1px solid #d9c8bb;
+        padding-top:30px;
+    }
+
+    .product-card{
+        grid-template-columns:1fr;
+    }
+
+    .steps{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .mockup-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .reuse-content{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:700px){
+
+    header{
+        padding:0 5%;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .hero{
+        padding:50px 5%;
+    }
+
+    .hero h1{
+        font-size:50px;
+    }
+
+    .subtitle{
+        font-size:25px;
+    }
+
+    .story,
+    .product-section,
+    .second-life,
+    .reuse,
+    .mockups,
+    .contact{
+        padding:55px 5%;
+    }
+
+    .section-title h2{
+        font-size:29px;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .steps,
+    .mockup-grid{
+        grid-template-columns:1fr;
+    }
+
+    .cta{
+        flex-direction:column;
+        text-align:center;
+        gap:15px;
+    }
+
+    footer{
+        flex-direction:column;
+        text-align:center;
+        gap:15px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<!-- =========================
+     MENU
+========================= -->
+
+<header>
+
+    <a href="#inicio" class="logo">
+        COOKIE<span>LOOP</span><small>♡</small>
+    </a>
+
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#producto">Producto</a>
+        <a href="#historia">Nuestra historia</a>
+        <a href="#segunda-vida">La segunda vida</a>
+        <a href="#mockups">Mockups</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+
+    <div class="cart">🛒</div>
+
+</header>
+
+
+<!-- =========================
+     INICIO
+========================= -->
+
+<section class="hero" id="inicio">
+
+    <div class="hero-text fade">
+
+        <div class="eyebrow">
+            GALLETAS ARTESANALES　♡
+        </div>
+
+        <h1>
+            COOKIE<br>LOOP
+        </h1>
+
+        <div class="subtitle">
+            Más que galletas,<br>
+            una segunda vida.
+        </div>
+
+        <p class="hero-description">
+            Galletas artesanales en un empaque reutilizable
+            que se convierte en tu organizador favorito.
+        </p>
+
+        <a href="#producto" class="button">
+            Descubrir más →
+        </a>
+
+    </div>
+
+
+    <div class="product-area fade">
+
+        <span class="decor decor1">✦</span>
+        <span class="decor decor2">〰</span>
+        <span class="decor decor3">✦</span>
+        <span class="decor decor4">♡</span>
+
+        <!--
+        AQUÍ APARECE TU PRODUCTO.
+        LA IMAGEN DEBE LLAMARSE:
+        producto.png
+        -->
+
+        <img
+            src="producto.png"
+            class="product-image"
+            alt="Empaque CookieLoop"
+        >
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     HISTORIA
+========================= -->
+
+<section class="story" id="historia">
+
+    <div class="story-box fade">
+
+        <div class="icon">♡</div>
+
+        <h2>Nuestra historia</h2>
+
+        <p>
+            CookieLoop nace de una idea simple:
+            que las cosas buenas no solo se disfrutan,
+            también se reutilizan.
+        </p>
+
+        <p>
+            Creamos galletas artesanales y un empaque
+            que tiene una segunda vida como organizador.
+        </p>
+
+    </div>
+
+
+    <div class="story-box fade">
+
+        <div class="icon">◎</div>
+
+        <h2>Nuestra misión</h2>
+
+        <p>
+            Endulzar tus momentos con galletas de calidad
+            y fomentar un consumo más consciente mediante
+            un empaque que combina creatividad,
+            funcionalidad y diseño.
+        </p>
+
+    </div>
+
+
+    <div class="story-box fade">
+
+        <div class="icon">♧</div>
+
+        <h2>La segunda vida</h2>
+
+        <p>
+            Después de disfrutar tus galletas,
+            la caja puede convertirse en un práctico
+            organizador para lápices, accesorios
+            y pequeños objetos.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PRODUCTO
+========================= -->
+
+<section class="product-section" id="producto">
+
+    <div class="section-title">
+
+        <div class="eyebrow">
+            EL PRODUCTO
+        </div>
+
+        <h2>
+            Una caja pensada para disfrutar y reutilizar
+        </h2>
+
+        <p>
+            Tres compartimentos, diferentes sabores
+            y una segunda vida para el empaque.
+        </p>
+
+    </div>
+
+
+    <div class="product-card">
+
+        <div>
+
+            <h3>
+                Los 3 compartimentos
+            </h3>
+
+            <p>
+                Una experiencia en cada bocado.
+                CookieLoop organiza las galletas
+                en módulos independientes.
+            </p>
+
+
+            <div class="features">
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ○
+                    </div>
+
+                    <strong>
+                        Galletas<br>
+                        artesanales
+                    </strong>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ♥
+                    </div>
+
+                    <strong>
+                        Chocolate<br>
+                        y sabores
+                    </strong>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ∞
+                    </div>
+
+                    <strong>
+                        Empaque<br>
+                        reutilizable
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="product-detail">
+
+            <img
+                src="producto.png"
+                alt="Detalle del producto CookieLoop"
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SEGUNDA VIDA
+========================= -->
+
+<section class="second-life" id="segunda-vida">
+
+    <div class="section-title">
+
+        <div class="eyebrow">
+            LA SEGUNDA VIDA DEL EMPAQUE
+        </div>
+
+        <h2>
+            Delicias hoy. Organización mañana.
+        </h2>
+
+        <p>
+            El ciclo CookieLoop continúa después
+            de terminar las galletas.
+        </p>
+
+    </div>
+
+
+    <div class="steps">
+
+        <div class="step">
+
+            <div class="number">
+                01
+            </div>
+
+            <div class="step-icon">
+                ♡
+            </div>
+
+            <h3>
+                Abre
+            </h3>
+
+            <p>
+                Descubre la presentación
+                y los tres compartimentos.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="number">
+                02
+            </div>
+
+            <div class="step-icon">
+                ○
+            </div>
+
+            <h3>
+                Disfruta
+            </h3>
+
+            <p>
+                Comparte tus galletas favoritas
+                y disfruta cada sabor.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="number">
+                03
+            </div>
+
+            <div class="step-icon">
+                ♻
+            </div>
+
+            <h3>
+                Reutiliza
+            </h3>
+
+            <p>
+                Conserva la caja cuando
+                las galletas se terminen.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="number">
+                04
+            </div>
+
+            <div class="step-icon">
+                ✦
+            </div>
+
+            <h3>
+                Organiza
+            </h3>
+
+            <p>
+                Guarda lápices, accesorios,
+                materiales y pequeños objetos.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ORGANIZADOR
+========================= -->
+
+<section class="reuse">
+
+    <div class="reuse-content">
+
+        <div>
+
+            <div class="eyebrow">
+                REUTILIZA · CREA · ORGANIZA
+            </div>
+
+            <h2>
+                Tu empaque no termina.
+                <br>
+                <span>Se transforma.</span>
+            </h2>
+
+            <p>
+                Después de disfrutar las galletas,
+                CookieLoop puede convertirse en un
+                organizador para tu escritorio.
+            </p>
+
+            <a href="#mockups" class="button">
+                Ver propuesta →
+            </a>
+
+        </div>
+
+
+        <div class="organizer">
+
+            <div class="organizer-box">
+
+                <div class="drawer">
+                    ✏
+                </div>
+
+                <div class="drawer">
+                    ♡
+                </div>
+
+                <div class="drawer">
+                    ✦
+                </div>
+
+            </div>
+
+            <div class="organizer-text">
+                COOKIELOOP · ORGANIZADOR REUTILIZABLE
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MOCKUPS
+========================= -->
+
+<section class="mockups" id="mockups">
+
+    <div class="section-title">
+
+        <div class="eyebrow">
+            PIEZAS PARA REDES Y ENTORNO DIGITAL
+        </div>
+
+        <h2>
+            Mockups CookieLoop
+        </h2>
+
+        <p>
+            La misma identidad visual aplicada
+            a cada momento del producto.
+        </p>
+
+    </div>
+
+
+    <div class="mockup-grid">
+
+
+        <!-- MOCKUP 1 -->
+
+        <div class="mockup">
+
+            <div class="mockup-image">
+
+                <div class="closed-box">
+                    COOKIE<br>LOOP ♡
+                </div>
+
+            </div>
+
+            <h3>
+                01 · Caja cerrada
+            </h3>
+
+            <p>
+                Presentación del empaque
+                como un regalo especial.
+            </p>
+
+        </div>
+
+
+        <!-- MOCKUP 2 -->
+
+        <div class="mockup">
+
+            <div class="mockup-image">
+
+                <img
+                    src="producto.png"
+                    alt="CookieLoop abierto"
+                >
+
+            </div>
+
+            <h3>
+                02 · Caja abierta
+            </h3>
+
+            <p>
+                Se muestran los tres compartimentos
+                y las variedades de galletas.
+            </p>
+
+        </div>
+
+
+        <!-- MOCKUP 3 -->
+
+        <div class="mockup">
+
+            <div class="mockup-image">
+
+                <div class="organizer-box"
+                     style="width:85%;height:150px;">
+
+                    <div class="drawer"
+                         style="height:95px;">
+                        ✏
+                    </div>
+
+                    <div class="drawer"
+                         style="height:120px;">
+                        ♡
+                    </div>
+
+                    <div class="drawer"
+                         style="height:85px;">
+                        ✦
+                    </div>
+
+                </div>
+
+            </div>
+
+            <h3>
+                03 · Segunda vida
+            </h3>
+
+            <p>
+                El empaque se transforma
+                en un organizador funcional.
+            </p>
+
+        </div>
+
+
+        <!-- MOCKUP 4 -->
+
+        <div class="mockup">
+
+            <div class="mockup-image">
+
+                <div class="organizer-box"
+                     style="width:85%;height:150px;">
+
+                    <div class="drawer"
+                         style="height:90px;">
+                        ✏
+                    </div>
+
+                    <div class="drawer"
+                         style="height:110px;">
+                        ♡
+                    </div>
+
+                    <div class="drawer"
+                         style="height:80px;">
+                        ∞
+                    </div>
+
+                </div>
+
+            </div>
+
+            <h3>
+                04 · Sobre el escritorio
+            </h3>
+
+            <p>
+                CookieLoop reutilizado para
+                guardar objetos cotidianos.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section class="cta">
+
+    <div>♡</div>
+
+    <div>
+
+        <h2>
+            Pequeños momentos,
+            grandes sonrisas.
+        </h2>
+
+        <p>
+            CookieLoop: diseñado para disfrutar
+            hoy y reutilizar mañana.
+        </p>
+
+    </div>
+
+    <div>∞</div>
+
+</section>
+
+
+<!-- =========================
+     CONTACTO
+========================= -->
+
+<section class="contact" id="contacto">
+
+    <div class="eyebrow">
+        COOKIELOOP
+    </div>
+
+    <h2>
+        Gracias por ser parte de este ciclo ♡
+    </h2>
+
+    <p>
+        Más que galletas, una segunda vida.
+    </p>
+
+    <p>
+        Proyecto académico de diseño
+        de producto y empaque.
+    </p>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div>
+
+        <div class="footer-logo">
+            COOKIELOOP ♡
+        </div>
+
+        <p>
+            Más que galletas, una segunda vida.
+        </p>
+
+    </div>
+
+
+    <div class="social">
+        Instagram　 TikTok　 Facebook
+    </div>
+
+
+    <div class="legal">
+        Términos y condiciones　|
+        Política de privacidad
+    </div>
+
+</footer>
+
+
+</body>
+</html>
